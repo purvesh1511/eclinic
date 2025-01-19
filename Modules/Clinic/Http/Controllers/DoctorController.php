@@ -465,6 +465,9 @@ class DoctorController extends Controller
             ->editColumn('doctor_id', function ($data) {
                 return view('clinic::backend.doctor.user_id', compact('data'));
             })
+            ->editColumn('is_pathology', function ($data) {
+                return $data->doctor->is_pathology ? 'Pathology' : 'Doctor';
+            })
 
             ->editColumn('clinic_id', function ($data) {
               
@@ -534,6 +537,7 @@ class DoctorController extends Controller
                     return $data->updated_at->isoFormat('llll');
                 }
             })
+            
             ->orderColumns(['id'], '-:column $1');
 
         // Custom Fields For export
@@ -562,6 +566,7 @@ class DoctorController extends Controller
      */
     public function store(DoctorRequest $request)
     {
+        // dd("ASdsad");exit;
         $data = $request->except('profile_image');
         $data = $request->all();
 
@@ -622,6 +627,7 @@ class DoctorController extends Controller
             'experience' => $request->experience,
             'vendor_id' => $request->vendor_id,
             'signature' => $request->signature,
+            'is_pathology' => $request->is_pathology,
         ];
         Doctor::create($doctor_data);
 
@@ -786,6 +792,7 @@ class DoctorController extends Controller
         $data['experience'] = optional($data->doctor)->experience ?? null;
         $data['signature'] = optional($data->doctor)->Signature ?? null;
         $data['vendor_id'] = optional($data->doctor)->vendor_id ?? null;
+        $data['is_pathology'] = optional($data->doctor)->is_pathology ?? null;
         $data['doctor_document'] = optional($data->doctor_document)->map(function ($document) {
 
             return [
@@ -857,6 +864,7 @@ class DoctorController extends Controller
             'doctor_id' => $data->id,
             'experience' => $request->experience,
             'signature' => $request->signature,
+            'is_pathology' => $request->is_pathology,
         ]);
         $doctor->save();
 

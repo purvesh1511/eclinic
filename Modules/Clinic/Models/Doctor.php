@@ -29,7 +29,7 @@ class Doctor extends BaseModel
      * The attributes that are mass assignable.
      */
     protected $table = 'doctors';
-    protected $fillable = ['doctor_id','experience','signature','vendor_id'];
+    protected $fillable = ['doctor_id','experience','signature','vendor_id','is_pathology'];
     protected $casts = [
 
         'doctor_id' => 'integer',

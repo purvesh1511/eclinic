@@ -249,6 +249,16 @@
               </div>
             </div>
           </div>
+          <div class="col-md-12">
+            <div class="form-group">
+              <div class="d-flex justify-content-between align-items-center form-control">
+                <label class="form-label mb-0" for="category-status">Is Pathology</label>
+                <div class="form-check form-switch">
+                  <input class="form-check-input" :value="1" name="is_pathology" id="category-status" type="checkbox" v-model="is_pathology" />
+                </div>
+              </div>
+            </div>
+          </div>
         </div>
       </div>
       <FormFooter :IS_SUBMITED="IS_SUBMITED"></FormFooter>
@@ -261,7 +271,7 @@ import { ref, computed, onMounted, watch } from 'vue'
 import Vue3Signature from 'vue3-signature'
 import { EDIT_URL, STORE_URL, UPDATE_URL, CLINIC_CENTER_LIST, COUNTRY_URL, STATE_URL, CITY_URL, SERVICE_LIST, COMMISSION_LIST, VENDOR_LIST, USER_LIST } from '../constant/doctor'
 import { useField, useForm } from 'vee-validate'
-
+console.log(STORE_URL);
 import { VueTelInput } from 'vue3-tel-input'
 
 import { useModuleId, useRequest, useOnOffcanvasHide } from '@/helpers/hooks/useCrudOpration'
@@ -542,6 +552,7 @@ const defaultData = () => {
     password: '',
     profile_image: [],
     status: 1,
+    is_pathology: 0,
     vendor_id: '',
     clinic_id: isReceptionist.value && clinicCenter.value.list.length > 0 ? [clinicCenter.value.list[0].id] : [], // Automatically select the first clinic for receptionist
     service_id: [],
@@ -586,6 +597,7 @@ const setFormData = (data) => {
       service_id: data.service_id || [],
       commission_id: data.commission_id,
       status: data.status ? true : false,
+      is_pathology: data.is_pathology ? true : false,
       custom_fields_data: data.custom_field_data,
       about_self: data.about_self,
       expert: data.expert,
@@ -711,6 +723,7 @@ const { value: mobile } = useField('mobile')
 const { value: vendor_id } = useField('vendor_id')
 const { value: clinic_id } = useField('clinic_id')
 const { value: status } = useField('status')
+const { value: is_pathology } = useField('is_pathology')
 const { value: service_id } = useField('service_id')
 const { value: commission_id } = useField('commission_id')
 const { value: profile_image } = useField('profile_image')

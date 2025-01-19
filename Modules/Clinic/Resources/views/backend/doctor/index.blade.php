@@ -194,7 +194,13 @@
             orderable: true,
             searchable: true,
         },
-
+        {
+            data: 'is_pathology',
+            name: 'is_pathology',
+            title: "{{__('clinic.lbl_is_pathology')}}",
+            orderable: true,
+            searchable: true,
+        },
         {
             data: 'mobile',
             name: 'mobile',

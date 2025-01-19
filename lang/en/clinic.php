@@ -79,6 +79,7 @@ return [
     'year' => 'Year',
     'add_qualification' => 'Add Qualification',
     'lbl_name' =>'Name',
+    'lbl_is_pathology' =>'Is Pathology',
     'lbl_clinic_center' => "Clinic",
     'lbl_verification_status' => 'Verification status',
     'lbl_action' => 'Action',
