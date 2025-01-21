@@ -11,7 +11,7 @@ if(document.querySelector('[data-render="global-booking"]')) {
 }
 
 $(document).on('click', '#appointment-button', function() {
- 
+  console.log("appointmentbutton");
   const bookingForm = document.getElementById('appointment-form-offcanvas')
   const bsInstance = bootstrap.Offcanvas.getOrCreateInstance(bookingForm)
   bsInstance.hide()

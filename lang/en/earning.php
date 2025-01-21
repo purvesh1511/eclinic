@@ -26,8 +26,10 @@ return [
     'total_pay' => 'Total Pay',
     'lbl_name' => 'Name',
     'lbl_doctor_earnings' => 'Doctor Earnings',
+    'lbl_pathology_earnings' => 'Pathology Earnings',
     'lbl_admin_earnings' => 'Admin Earnings',
     'lbl_vendor_earnings' => 'Clinic Admin Earning',
     'doctor_earning' => 'Doctor Earning',
+    'pathology_earning' => 'Pathology Earning',
     'clinicadmin_earning' => 'Clinic Admin Earning',
 ];

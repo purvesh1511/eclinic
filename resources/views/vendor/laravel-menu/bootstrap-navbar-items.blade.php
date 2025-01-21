@@ -15,7 +15,7 @@
       $active = '';
   }
   ?>
-  <li @lm_attrs($item) @if ($item->hasChildren()) class="nav-item" @endif @lm_endattrs>
+  <li @lm_attrs($item) @if ($item->hasChildren()) class="nav-item  11" @endif @lm_endattrs>
       @if ($item->link)
           <a @lm_attrs($item->link)
               class="nav-link"

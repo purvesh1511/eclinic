@@ -1,6 +1,6 @@
 <template>
   <form @submit="formSubmit">
-    <div class="offcanvas offcanvas-end offcanvas-w-40 offcanvas-booking doctoroffcanvas" tabindex="-1" id="form-offcanvas" aria-labelledby="form-offcanvasLabel">
+    <div class="offcanvas offcanvas-end offcanvas-w-40 offcanvas-booking pathologyoffcanvas" tabindex="-1" id="form-offcanvas" aria-labelledby="form-offcanvasLabel">
       <FormHeader :currentId="currentId" :editTitle="editTitle" :createTitle="createTitle"></FormHeader>
       <div class="offcanvas-body">
         <div class="row">
@@ -542,7 +542,7 @@ const defaultData = () => {
     password: '',
     profile_image: [],
     status: 1,
-    is_pathology: 0,
+    is_pathology: 1,
     vendor_id: '',
     clinic_id: isReceptionist.value && clinicCenter.value.list.length > 0 ? [clinicCenter.value.list[0].id] : [], // Automatically select the first clinic for receptionist
     service_id: [],
@@ -587,7 +587,7 @@ const setFormData = (data) => {
       service_id: data.service_id || [],
       commission_id: data.commission_id,
       status: data.status ? true : false,
-      is_pathology: data.is_pathology ? true : false,
+      is_pathology: data.is_pathology ? true : true,
       custom_fields_data: data.custom_field_data,
       about_self: data.about_self,
       expert: data.expert,

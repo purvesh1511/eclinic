@@ -9,6 +9,7 @@ use Modules\Clinic\Http\Controllers\DoctorController;
 use Modules\Clinic\Http\Controllers\ClinicAppointmentController;
 use Modules\Clinic\Http\Controllers\DoctorSessionController;
 use Modules\Clinic\Http\Controllers\ClinicSessionController;
+use Modules\Clinic\Http\Controllers\PathologyController;
 use Modules\Clinic\Http\Controllers\ReceptionistController;
 use Modules\Clinic\Http\Controllers\SystemServiceController;
 
@@ -153,6 +154,42 @@ Route::group(['prefix' => 'app', 'as' => 'backend.', 'middleware' => ['auth']], 
     Route::get('employees-review', [DoctorController::class, 'review'])->name('employees.review');
     Route::get('all-employees', [DoctorController::class, 'index'])->name('employees.all');
     Route::resource('doctor', DoctorController::class);
+
+
+    // doctor Routes
+    Route::group(['prefix' => 'pathology', 'as' => 'pathology.'], function () {
+        Route::get('index_list', [PathologyController::class, 'index_list'])->name('index_list');
+        Route::get('commision_list', [PathologyController::class, 'commision_list'])->name('commision_list');
+        Route::get('export', [PathologyController::class, 'export'])->name('export');
+        Route::get('employee_list', [PathologyController::class, 'employee_list'])->name('employee_list');
+        Route::get('get-available-slot', [PathologyController::class, 'availableSlot'])->name('get_available_slot');
+        Route::post('change-password', [PathologyController::class, 'change_password'])->name('change_password');
+        Route::post('update-status/{id}', [PathologyController::class, 'update_status'])->name('update_status');
+        Route::post('block-employee/{id}', [PathologyController::class, 'block_employee'])->name('block-employee');
+        Route::get('verify-doctor/{id}', [PathologyController::class, 'verify_doctor'])->name('verify-doctor');
+        Route::get('review_data', [PathologyController::class, 'review_data'])->name('review_data');
+        Route::delete('destroy_review/{id}', [PathologyController::class, 'destroy_review'])->name('destroy_review');
+        Route::get('index_data', [PathologyController::class, 'index_data'])->name('index_data');
+        Route::get('trashed', [PathologyController::class, 'trashed'])->name('trashed');
+        Route::get('trashed/{id}', [PathologyController::class, 'restore'])->name('restore');
+        Route::post('bulk-action', [PathologyController::class, 'bulk_action'])->name('bulk_action');
+        // Route::post('bulk-action-review', [PathologyController::class, 'bulk_action_review'])->name('bulk_action_review');
+        Route::get('/type/{type}', [PathologyController::class, 'employees_type_data'])->name('employee_type');
+        Route::post('/send-push-notification', [PathologyController::class, 'send_push_notification'])->name('send-push-notification');
+        Route::get('/assign-doctor-list', [ClinicsServiceController::class, 'assign_doctor_list'])->name('assign_doctor_list');
+        // Route::get('view', [PathologyController::class, 'view'])->name('view');
+        Route::get('doctor-details/{id}', [PathologyController::class, 'doctorDeatails'])->name('doctorDeatails');
+        Route::get('review_data', [PathologyController::class, 'review_data'])->name('review_data');
+        Route::post('bulk-action-review', [PathologyController::class, 'bulk_action_review'])->name('bulk_action_review');
+        Route::delete('destroy_review/{id}', [PathologyController::class, 'destroy_review'])->name('destroy_review');
+        Route::get('service_list', [PathologyController::class, 'service_list'])->name('service_list');
+        Route::get('user-list', [PathologyController::class, 'user_list'])->name('user_list');
+
+    });
+    // Route::get('doctors-review', [PathologyController::class, 'review'])->name('pathology.review');
+    // Route::get('employees-review', [PathologyController::class, 'review'])->name('employees.review');
+    // Route::get('all-employees', [PathologyController::class, 'index'])->name('employees.all');
+    Route::resource('pathology', PathologyController::class);
 
 
     Route::group(['prefix' => 'doctor-session', 'as' => 'doctor-session.'], function () {

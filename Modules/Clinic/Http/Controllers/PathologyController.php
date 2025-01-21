@@ -31,7 +31,7 @@ use App\Models\Holiday;
 use  App\Models\DoctorHoliday;
 use Modules\CustomForm\Models\CustomForm;
 
-class DoctorController extends Controller
+class PathologyController extends Controller
 {
     protected string $exportClass = '\App\Exports\DoctorExport';
 
@@ -41,7 +41,7 @@ class DoctorController extends Controller
         $this->module_title = 'Doctor Detail';
 
         // module name
-        $this->module_name = 'doctor';
+        $this->module_name = 'pathology';
 
         // directory path of the module
         $this->module_path = 'clinic::backend';
@@ -68,8 +68,9 @@ class DoctorController extends Controller
         $clinic = Clinics::SetRole(auth()->user())->with('clinicdoctor','specialty','clinicdoctor','receptionist')->get();
         $vendor =User::where('user_type','vendor')->get();
 
-        $module_title = 'clinic.doctor_list';
-        $create_title = 'clinic.doctor_title';
+        $module_title = 'clinic.pathology_list';
+        $create_title = 'clinic.pathology_list';
+        // dd("ASd");
 
         $export_import = true;
         $export_columns = [
@@ -99,16 +100,16 @@ class DoctorController extends Controller
                 'text' => __('clinic.lbl_status'),
             ],
         ];
-        $export_url = route('backend.doctor.export');
+        $export_url = route('backend.pathology.export');
 
-        return view('clinic::backend.doctor.index', compact('filter','vendor','module_action', 'module_title','create_title','columns', 'customefield', 'export_import', 'export_columns','clinic', 'export_url'));
+        return view('clinic::backend.pathology.index', compact('filter','vendor','module_action', 'module_title','create_title','columns', 'customefield', 'export_import', 'export_columns','clinic', 'export_url'));
 
     }
     public function index_list(Request $request)
     {
         $term = trim($request->q);
 
-        $query = Doctor::SetRole(auth()->user())->with('user', 'doctorclinic')->where('status',1);
+        $query = Doctor::SetRole(auth()->user())->with('user', 'doctorclinic')->where('is_pathology',1)->where('status',1);
 
         if($request->has('clinic_id') && $request->clinic_id != '') {
             $clinicId = $request->clinic_id;
@@ -442,7 +443,7 @@ class DoctorController extends Controller
             }
         }
         $query->whereHas('doctor', function ($query) use ($filter) {
-            $query->where('is_pathology', 0);
+            $query->where('is_pathology', 1);
         });
         $query->orderBy('created_at', 'desc');
 
@@ -460,13 +461,13 @@ class DoctorController extends Controller
 
                     $enable_push_notification = $other_settings->val;
                 }
-                return view('clinic::backend.doctor.action_column', compact('data', 'enable_push_notification','customform'));
+                return view('clinic::backend.pathology.action_column', compact('data', 'enable_push_notification','customform'));
             })
             // ->addColumn('doctor_session', function ($data) {
             //     return " <button type='button' class='btn text-success p-0 fs-5' data-assign-module='" . $data->id . "' data-assign-target='#session-form-offcanvas' data-assign-event='employee_assign' class='fs-6 text-info border-0 bg-transparent text-nowrap' data-bs-toggle='tooltip' title='Session'>  <i class='ph ph-paper-plane-tilt'></i></button>";
             // })
             ->editColumn('doctor_id', function ($data) {
-                return view('clinic::backend.doctor.user_id', compact('data'));
+                return view('clinic::backend.pathology.user_id', compact('data'));
             })
             ->editColumn('is_pathology', function ($data) {
                 return $data->doctor->is_pathology ? 'Pathology' : 'Doctor';
@@ -499,7 +500,7 @@ class DoctorController extends Controller
 
             ->editColumn('email_verified_at', function ($data) {
 
-                return view('clinic::backend.doctor.verify_action', compact('data'));
+                return view('clinic::backend.pathology.verify_action', compact('data'));
             })
             ->editColumn('user_type', function ($data) {
                 return '<span class="badge booking-status bg-primary-subtle p-3">' . str_replace("_", "", ucfirst($data->user_type)) . '</span>';
@@ -524,7 +525,7 @@ class DoctorController extends Controller
 
                 return '
                     <div class="form-check form-switch ">
-                        <input type="checkbox" data-url="' . route('backend.doctor.update_status', $data->id) . '" data-token="' . csrf_token() . '" class="switch-status-change form-check-input"  id="datatable-row-' . $data->id . '"  name="status" value="' . $data->id . '" ' . $checked . '>
+                        <input type="checkbox" data-url="' . route('backend.pathology.update_status', $data->id) . '" data-token="' . csrf_token() . '" class="switch-status-change form-check-input"  id="datatable-row-' . $data->id . '"  name="status" value="' . $data->id . '" ' . $checked . '>
                     </div>
                 ';
             })
@@ -754,7 +755,7 @@ class DoctorController extends Controller
 
         $data = User::role('doctor')->findOrFail($id);
 
-        return view('clinic::backend.doctor.show', compact('module_action', "$data"));
+        return view('clinic::backend.pathology.show', compact('module_action', "$data"));
     }
 
     /**
@@ -1046,7 +1047,7 @@ class DoctorController extends Controller
     }
     // public function view()
     // {
-    //     return view('clinic::backend.doctor.view');
+    //     return view('clinic::backend.pathology.view');
     // }
 
     public function review(Request $request)
@@ -1058,7 +1059,7 @@ class DoctorController extends Controller
         if($request->has('doctor_id')){
             $doctor_id = $request->doctor_id;
         }
-        return view('clinic::backend.doctor.review', compact('module_title', 'filter', 'doctor_id'));
+        return view('clinic::backend.pathology.review', compact('module_title', 'filter', 'doctor_id'));
     }
 
     public function review_data(Datatables $datatable, Request $request)
@@ -1095,7 +1096,7 @@ class DoctorController extends Controller
                 }
             })
             ->addColumn('action', function ($data) {
-                return view('clinic::backend.doctor.review_action_column', compact('data'));
+                return view('clinic::backend.pathology.review_action_column', compact('data'));
             })
             ->filterColumn('doctor_id', function ($query, $keyword) {
                 if (!empty($keyword)) {

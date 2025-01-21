@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use Modules\Earning\Http\Controllers\Backend\EarningsController;
 use App\Http\Controllers\SearchController;
+use Modules\Earning\Http\Controllers\Backend\PathologyEarningsController;
 use Modules\Earning\Http\Controllers\Backend\VendorEarningsController;
 
 /*
@@ -52,5 +53,14 @@ Route::group(['prefix' => 'app', 'as' => 'backend.', 'middleware' => ['auth']], 
       
     });
     Route::resource('vendor-earnings', VendorEarningsController::class);
+
+    Route::group(['prefix' => 'pathologyearnings', 'as' => 'pathologyearnings.'],function () {
+      Route::get('index_list', [PathologyEarningsController::class, 'index_list'])->name('index_list');
+      Route::get('index_data', [PathologyEarningsController::class, 'index_data'])->name('index_data');
+      Route::get('export', [PathologyEarningsController::class, 'export'])->name('export');
+      Route::get('get_search_data', [SearchController::class, 'get_search_data'])->name('get_search_data');
+      Route::get('get-employee-commissions', [PathologyEarningsController::class, 'get_employee_commissions'])->name('get-employee-commissions');
+    });
+    Route::resource('pathologyearnings', PathologyEarningsController::class);
 });
 
