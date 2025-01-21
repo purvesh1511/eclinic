@@ -9,7 +9,7 @@ use Modules\Clinic\Models\Receptionist;
 use Maatwebsite\Excel\Concerns\WithEvents;
 use Maatwebsite\Excel\Events\AfterSheet;
 use Maatwebsite\Excel\Concerns\WithCustomStartCell;
-class DoctorExport implements FromCollection, WithHeadings, WithEvents, WithCustomStartCell
+class PathologyExport implements FromCollection, WithHeadings, WithEvents, WithCustomStartCell
 {
     public array $columns;
 
@@ -46,7 +46,7 @@ class DoctorExport implements FromCollection, WithHeadings, WithEvents, WithCust
 
         $query->orderBy('users.updated_at', 'desc');
         $query->whereHas('doctor', function ($query) {
-            $query->where('is_pathology', 0);
+            $query->where('is_pathology', 1);
         });
         $query = $query->get();
 

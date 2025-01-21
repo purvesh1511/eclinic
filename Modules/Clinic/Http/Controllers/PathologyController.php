@@ -33,7 +33,7 @@ use Modules\CustomForm\Models\CustomForm;
 
 class PathologyController extends Controller
 {
-    protected string $exportClass = '\App\Exports\DoctorExport';
+    protected string $exportClass = '\App\Exports\PathologyExport';
 
     public function __construct()
     {
