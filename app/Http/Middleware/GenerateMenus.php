@@ -36,116 +36,13 @@ class GenerateMenus
                 ]);
 
                 $this->mainRoute($menu, [
-                    'icon' => 'ph ph-sliders-horizontal',
-                    'title' => __('sidebar.appointment'),
-                    'route' => 'backend.appointments.index',
-                    'permission' => ['view_clinic_appointment_list'],
-                    'active' => ['app/appointments'],
-                    'order' => 0,
-                ]);
-
-                $encounter = $this->parentMenu($menu, [
-                    'icon' => 'ph ph-clock-counter-clockwise',
-                    'title' =>  __('sidebar.encounter'),
-                    'route' => 'backend.encounter.index',
-                    'permission' => ['view_encounter'],
-                    'nickname' => 'encounter',
-                    'order' => 0,
-                ]);
-                $this->childMain($encounter, [
-                    'icon' => 'ph ph-list-bullets',
-                    'title' => __('sidebar.encounter'),
-                    'route' => 'backend.encounter.index',
-                    'active' => 'app/encounter',
-                    'permission' => ['view_encounter'],
-                    'order' => 0,
-                ]);
-
-                $this->childMain($encounter, [
-                    'icon' => 'ph ph-layout',
-                    'title' => __('sidebar.encounter_template'),
-                    'route' => 'backend.encounter-template.index',
-                    'active' => 'app/encounter-template',
-                    'permission' => ['view_encounter_template'],
-                    'order' => 0,
-                ]);
-
-                $this->childMain($encounter, [
-                    'icon' => 'ph ph-warning-diamond',
-                    'title' => __('sidebar.problems'),
-                    'route' => 'backend.problems.index',
-                    'active' => 'app/problems',
-                    'permission' => ['view_encounter'],
-                    'order' => 0,
-                ]);
-                $this->childMain($encounter, [
-                    'icon' => 'ph ph-eye',
-                    'title' => __('appointment.observation'),
-                    'route' => 'backend.observation.index',
-                    'active' => 'app/observation',
-                    'permission' => ['view_encounter'],
-                    'order' => 0,
-                ]);
-                $this->mainRoute($menu, [
-                    'icon' => 'ph ph-calendar-heart',
-                    'title' => __('clinic.specialization'),
-                    'route' => 'backend.specializations.index',
-                    'active' => ['app/specializations'],
-                    'permission' => ['view_specialization'],
-                    'order' => 0,
-                ]);
-                $this->mainRoute($menu, [
                     'icon' => 'ph ph-devices',
                     'title' => __('sidebar.access_control'),
                     'route' => 'backend.permission-role.list',
                     'active' => ['app/permission-role'],
                     'order' => 10,
                 ]);
-                if (multiVendor() == "1")
-                {
-                    $this->mainRoute($menu, [
-                        'icon' => 'ph ph-user-square',
-                        'title' => __('sidebar.vendors'),
-                        'route' => 'backend.multivendors.index',
-                        'active' => ['app/multivendors'],
-                        'permission' => ['view_vendor_list'],
-                        'order' => 0,
-                    ]);
-                    $this->mainRoute($menu, [
-                        'icon' => 'ph ph-user-circle-check',
-                        'title' => __('sidebar.vendor_earning'),
-                        'route' => 'backend.vendor-earnings.index',
-                        'active' => ['app/vendor-earnings'],
-                        'permission' => ['view_vendor_earning'],
-                        'order' => 0,
-                    ]);
-                    $this->mainRoute($menu, [
-                        'icon' => 'ph ph-share',
-                        'title' =>  __('sidebar.request_service'),
-                        'route' => 'backend.requestservices.index',
-                        'active' => ['app/requestservices'],
-                        'permission' => ['view_request_service'],
-                        'order' => 0,
-                    ]);
-                    $this->mainRoute($menu, [
-                        'icon' => 'ph ph-currency-dollar-simple',
-                        'title' => __('sidebar.vendor_payout'),
-                        'route' => 'backend.reports.vendor-payout-report',
-                        'active' => ['app/vendor-payout-report'],
-                        'permission' => ['view_vendor_payouts'],
-                        'order' => 0,
-                    ]);
-                    $this->mainRoute($menu, [
-                        'icon' => 'ph ph-airplay',
-                        'title' => __('sidebar.system_service'),
-                        'route' => 'backend.system-service.index',
-                        'active' => ['app/system-service'],
-                        'permission' => ['view_system_service'],
-                        'order' => 0,
-                    ]);
-                    
-                }
-
+                
                 $this->mainRoute($menu, [
                     'icon' => 'ph ph-file-magnifying-glass',
                     'title' =>  __('dashboard.lbl_title_appointment_overview'),
@@ -160,38 +57,9 @@ class GenerateMenus
                     'active' => ['app/clinic-overview'],
                     'order' => 0,
                 ]);
-                $notification = $this->parentMenu($menu, [
-                    'icon' => 'ph ph-bell',
-                    'title' => __('notification.title'),
-                    'nickname' => 'notifications',
-                    'permission' => ['view_notification'],
-                    'order' => 0,
-                ]);
-    
-                $this->childMain($notification, [
-                    'icon' => 'ph ph-list-bullets',
-                    'title' => __('notification.list'),
-                    'route' => 'backend.notifications.index',
-                    'shortTitle' => 'Li',
-                    'active' => 'app/notifications',
-                    'permission' => ['view_notification'],
-                    'order' => 0,
-                ]);
-
-                $this->childMain($notification, [
-                    'icon' => 'ph ph-layout',
-                    'title' => __('notification.template'),
-                    'route' => 'backend.notification-templates.index',
-                    'shortTitle' => 'TE',
-                    'active' => 'app/notification-templates*',
-                    'permission' => ['view_notification_template'],
-                    'order' => 0,
-                ]);
-
                 
-            } elseif (auth()->user()->hasRole('doctor')) {
-                // $this->staticMenu($menu, ['title' => __('menu.main'), 'order' => 0]);
 
+            } elseif (auth()->user()->hasRole('doctor')) {
                 $this->mainRoute($menu, [
                     'icon' => 'ph ph-squares-four',
                     'title' => __('sidebar.dashboard'),
@@ -199,20 +67,91 @@ class GenerateMenus
                     'active' => ['app', 'app/doctor-dashboard'],
                     'order' => 0,
                 ]);
+            }elseif(auth()->user()->hasRole('receptionist')) {
+                // main
                 $this->mainRoute($menu, [
-                    'icon' => 'ph ph-sliders-horizontal',
-                    'title' => __('sidebar.appointment'),
-                    'route' => 'backend.appointments.index',
-                    'permission' => ['view_clinic_appointment_list'],
-                    'active' => ['app/appointments'],
+                    'icon' => 'ph ph-squares-four',
+                    'title' => __('sidebar.dashboard'),
+                    'route' => 'backend.receptionist-dashboard',
+                    'active' => ['app', 'app/receptionist-dashboard'],
+                    'order' => 0,
+                ]);
+                
+            }elseif(auth()->user()->hasRole('vendor')) {
+                // main
+                $this->mainRoute($menu, [
+                    'icon' => 'ph ph-squares-four',
+                    'title' => __('sidebar.dashboard'),
+                    'route' => 'backend.doctor-dashboard',
+                    'active' => ['app', 'app/doctor-dashboard'],
                     'order' => 0,
                 ]);
 
+                $this->mainRoute($menu, [
+                    'icon' => 'ph ph-percent',
+                    'title' =>  __('appointment.revenue_breakdown'),
+                    'route' => 'backend.reports.commission-revenue',
+                    'active' => ['app/commission-revenue'],
+                    'order' => 0,
+                ]);
+            }
+            // if(auth()->user()->can('view_doctors')){
+            if (multiVendor() == "1" && auth()->user()->can('view_vendor_list')) {
+                $this->mainRoute($menu, [
+                    'icon' => 'ph ph-user-square',
+                    'title' => __('sidebar.vendors'),
+                    'route' => 'backend.multivendors.index',
+                    'active' => ['app/multivendors'],
+                    'permission' => ['view_vendor_list'],
+                    'order' => 0,
+                ]);
+            }
+            if (multiVendor() == "1" && auth()->user()->can('view_vendor_earning')) {
+                $this->mainRoute($menu, [
+                    'icon' => 'ph ph-user-circle-check',
+                    'title' => __('sidebar.vendor_earning'),
+                    'route' => 'backend.vendor-earnings.index',
+                    'active' => ['app/vendor-earnings'],
+                    'permission' => ['view_vendor_earning'],
+                    'order' => 0,
+                ]);
+            }
+            if (multiVendor() == "1" && auth()->user()->can('view_request_service')) {
+                $this->mainRoute($menu, [
+                    'icon' => 'ph ph-share',
+                    'title' =>  __('sidebar.request_service'),
+                    'route' => 'backend.requestservices.index',
+                    'active' => ['app/requestservices'],
+                    'permission' => ['view_request_service'],
+                    'order' => 0,
+                ]);
+            }
+            if (multiVendor() == "1" && auth()->user()->can('view_vendor_payouts')) {
+                $this->mainRoute($menu, [
+                    'icon' => 'ph ph-currency-dollar-simple',
+                    'title' => __('sidebar.vendor_payout'),
+                    'route' => 'backend.reports.vendor-payout-report',
+                    'active' => ['app/vendor-payout-report'],
+                    'permission' => ['view_vendor_payouts'],
+                    'order' => 0,
+                ]);
+            }
+            if (multiVendor() == "1" && auth()->user()->can('view_system_service')) {
+                $this->mainRoute($menu, [
+                    'icon' => 'ph ph-airplay',
+                    'title' => __('sidebar.system_service'),
+                    'route' => 'backend.system-service.index',
+                    'active' => ['app/system-service'],
+                    'permission' => ['view_system_service'],
+                    'order' => 0,
+                ]);
+            }
+            if(auth()->user()->can('view_doctors')){
                 $doctor = $this->parentMenu($menu, [
                     'icon' => 'ph ph-stethoscope',
                     'title' => __('sidebar.doctor'),
                     'route' => 'backend.doctor.index',
-                    'permission' => ['view_doctors_session'],
+                    'permission' => ['view_doctors'],
                     'nickname' => 'doctor',
                     'order' => 0,
                 ]);
@@ -224,6 +163,9 @@ class GenerateMenus
                     'permission' => ['view_doctors'],
                     'order' => 0,
                 ]);
+            }
+            if(auth()->user()->can('view_doctors_session') && auth()->user()->can('view_doctors')){
+                
                 $this->childMain($doctor, [
                     'icon' => 'ph ph-clock',
                     'title' => __('clinic.doctor_session'),
@@ -232,7 +174,9 @@ class GenerateMenus
                     'permission' => ['view_doctors_session'],
                     'order' => 0,
                 ]);
-
+            }
+            
+            if(auth()->user()->can('view_doctors_session')){
                 $this->mainRoute($menu, [
                     'icon' => 'ph ph-clock',
                     'title' => __('clinic.doctor_session'),
@@ -241,45 +185,8 @@ class GenerateMenus
                     'permission' => ['view_doctors_session'],
                     'order' => 0,
                 ]);
-
-                $this->mainRoute($menu, [
-                    'icon' => 'ph ph-list-bullets',
-                    'title' => __('sidebar.encounter'),
-                    'route' => 'backend.encounter.index',
-                    'active' => 'app/encounter',
-                    'permission' => ['view_encounter'],
-                    'order' => 0,
-                ]);
-
-                
-            }elseif(auth()->user()->hasRole('receptionist')) {
-                // $this->staticMenu($menu, ['title' => __('menu.main'), 'order' => 0]);
-
-                // main
-                $this->mainRoute($menu, [
-                    'icon' => 'ph ph-squares-four',
-                    'title' => __('sidebar.dashboard'),
-                    'route' => 'backend.receptionist-dashboard',
-                    'active' => ['app', 'app/receptionist-dashboard'],
-                    'order' => 0,
-                ]);
-                $this->mainRoute($menu, [
-                    'icon' => 'ph ph-sliders-horizontal',
-                    'title' => __('sidebar.appointment'),
-                    'route' => 'backend.appointments.index',
-                    'permission' => ['view_clinic_appointment_list'],
-                    'active' => ['app/appointments'],
-                    'order' => 0,
-                ]);
-                $this->mainRoute($menu, [
-                    'icon' => 'ph ph-list-bullets',
-                    'title' => __('sidebar.encounter'),
-                    'route' => 'backend.encounter.index',
-                    'active' => 'app/encounter',
-                    'permission' => ['view_encounter'],
-                    'order' => 0,
-                ]);
-
+            }
+            if(auth()->user()->can('view_clinics_center')){
                 $this->mainRoute($menu, [
                     'icon' => 'ph ph-hospital',
                     'title' => __('sidebar.clinic'),
@@ -288,19 +195,31 @@ class GenerateMenus
                     'active' => ['app/clinics'],
                     'order' => 0,
                 ]);
-            }elseif(auth()->user()->hasRole('vendor')) {
-                // dd("SAdsadad");
-                // $this->staticMenu($menu, ['title' => __('menu.main'), 'order' => 0]);
+            }
 
-                // main
+            if(auth()->user()->can('view_specialization')){
                 $this->mainRoute($menu, [
-                    'icon' => 'ph ph-squares-four',
-                    'title' => __('sidebar.dashboard'),
-                    'route' => 'backend.doctor-dashboard',
-                    'active' => ['app', 'app/doctor-dashboard'],
+                    'icon' => 'ph ph-calendar-heart',
+                    'title' => __('clinic.specialization'),
+                    'route' => 'backend.specializations.index',
+                    'active' => ['app/specializations'],
+                    'permission' => ['view_specialization'],
                     'order' => 0,
                 ]);
+            }
 
+            if(auth()->user()->can('view_clinic_appointment_list')){
+                $this->mainRoute($menu, [
+                    'icon' => 'ph ph-sliders-horizontal',
+                    'title' => __('sidebar.appointment'),
+                    'route' => 'backend.appointments.index',
+                    'permission' => ['view_clinic_appointment_list'],
+                    'active' => ['app/appointments'],
+                    'order' => 0,
+                ]);
+            }
+
+            if(auth()->user()->can('view_encounter')){
                 $encounter = $this->parentMenu($menu, [
                     'icon' => 'ph ph-clock-counter-clockwise',
                     'title' =>  __('sidebar.encounter'),
@@ -343,176 +262,218 @@ class GenerateMenus
                     'permission' => ['view_encounter'],
                     'order' => 0,
                 ]);
+            }
 
+            if(auth()->user()->can('view_clinics_category')){
+                $this->mainRoute($menu, [
+                    'icon' => 'ph ph-list-bullets',
+                    'title' => __('sidebar.categories'),
+                    'route' => 'backend.category.index',
+                    'permission' => ['view_clinics_category'],
+                    'active' => ['app/category'],
+                    'order' => 0,
+                ]);
+            }
+            if(auth()->user()->can('view_clinics_service')){
+                $this->mainRoute($menu, [
+                    'icon' => 'ph ph-first-aid-kit',
+                    'title' => __('sidebar.services'),
+                    'route' => 'backend.services.index',
+                    'active' => ['app/services'],
+                    'permission' => ['view_clinics_service'],
+                    'order' => 0,
+                ]);
+            }
+            if(auth()->user()->can('view_reviews')){
+                $this->mainRoute($menu, [
+                    'icon' => ' ph ph-star',
+                    'title' => __('sidebar.reviews'),
+                    'route' => ['backend.doctors.review'],
+                    'active' => ['app/doctors-review'],
+                    'permission' => ['view_reviews'],
+                    'order' => 0,
+                ]);
+            }
+            if(auth()->user()->can('view_customer')){
+                $this->mainRoute($menu, [
+                    'icon' => 'ph ph-users',
+                    'title' =>  __('sidebar.patient'),
+                    'route' => 'backend.customers.index',
+                    'active' => ['app/customers'],
+                    'permission' => 'view_customer',
+                    'order' => 0,
+                ]);
+            }
+            if(auth()->user()->can('view_clinic_receptionist_list')){
+                $this->mainRoute($menu, [
+                    'icon' => 'ph ph-user-circle-gear',
+                    'title' => __('sidebar.receptionist'),
+                    'route' => 'backend.receptionist.index',
+                    'active' => ['app/receptionist'],
+                    'permission' => ['view_clinic_receptionist_list'],
+                    'order' => 0,
+                ]);
+            }
+            if(auth()->user()->can('view_tax')){
                 $this->mainRoute($menu, [
                     'icon' => 'ph ph-percent',
-                    'title' =>  __('appointment.revenue_breakdown'),
-                    'route' => 'backend.reports.commission-revenue',
-                    'active' => ['app/commission-revenue'],
+                    'title' => __('sidebar.tax'),
+                    'route' => 'backend.tax.index',
+                    'active' => ['app/tax'],
+                    'permission' => 'view_tax',
+                    'order' => 0,
+                ]);
+            }
+            if(auth()->user()->can('view_billing_record')){
+                $this->mainRoute($menu, [
+                    'icon' => 'ph ph-invoice',
+                    'title' => __('sidebar.billing_record'),
+                    'route' => 'backend.billing-record.index',
+                    'active' => ['app/billing-record'],
+                    'permission' => 'view_billing_record',
+                    'order' => 0,
+                ]);
+            }
+            if(auth()->user()->can('view_doctor_earning')){
+                $this->mainRoute($menu, [
+                    'icon' => 'ph ph-currency-dollar',
+                    'title' => __('sidebar.doctor_earning'),
+                    'route' => 'backend.earnings.index',
+                    'active' => ['app/earnings'],
+                    'permission' => ['view_doctor_earning'],
+                    'order' => 0,
+                ]);
+            }
+            if(auth()->user()->can('view_doctor_payouts')){
+                $this->mainRoute($menu, [
+                    'icon' => 'ph ph-currency-dollar',
+                    'title' => __('sidebar.doctor_payout'),
+                    'route' => 'backend.reports.doctor-payout-report',
+                    'active' => ['app/doctor-payout-report'],
+                    'permission' => ['view_doctor_payouts'],
+                    'order' => 0,
+                ]);
+            }
+            if(auth()->user()->can('view_setting')){
+                $this->mainRoute($menu, [
+                    'icon' => 'ph ph-gear-six',
+                    'title' => __('menu.settings'),
+                    'route' => 'backend.settings',
+                    'active' => 'app/settings',
+                    'permission' => ['view_setting'],
+                    'order' => 0,
+                ]);
+            }
+            if(auth()->user()->can('view_location')){
+                $location = $this->parentMenu($menu, [
+                    'icon' => 'ph ph-map-pin-line',
+                    'title' => __('sidebar.location'),
+                    'nickname' => 'location',
+                    'permission' => ['view_location'],
+                    'order' => 0,
+                ]);
+
+                $this->childMain($location, [
+                    'title' => __('sidebar.city'),
+                    'route' => 'backend.city.index',
+                    'active' => 'app/city',
+                    'shortTitle' => 'CT',
+                    'permission' => ['view_city'],
+                    'order' => 0,
+                    'icon' => 'ph ph-city',
+                ]);
+                $this->childMain($location, [
+                    'title' => __('sidebar.state'),
+                    'route' => 'backend.state.index',
+                    'shortTitle' => 'CT',
+                    'permission' => ['view_state'],
+                    'active' => ['app/state'],
+                    'order' => 0,
+                    'icon' => 'ph ph-map-trifold',
+                ]);
+                
+                $this->childMain($location, [
+                    'title' => __('sidebar.country'),
+                    'route' => 'backend.country.index',
+                    'shortTitle' => 'CT',
+                    'active' => ['app/country'],
+                    'permission' => ['view_country'],
+                    'order' => 0,
+                    'icon' => 'ph ph-globe-hemisphere-east',
+                ]);
+            }
+            if(auth()->user()->can('view_pages')){
+                $this->mainRoute($menu, [
+                    'icon' => ' ph ph-note',
+                    'title' => __('page.title'),
+                    'route' => ['backend.pages.index'],
+                    'active' => ['app/pages'],
+                    'permission' => ['view_pages'],
+                    'order' => 0,
+                ]);
+            }
+            if(auth()->user()->can('view_notification')){
+                $notification = $this->parentMenu($menu, [
+                    'icon' => 'ph ph-bell',
+                    'title' => __('notification.title'),
+                    'nickname' => 'notifications',
+                    'permission' => ['view_notification'],
+                    'order' => 0,
+                ]);
+
+                $this->childMain($notification, [
+                    'icon' => 'ph ph-list-bullets',
+                    'title' => __('notification.list'),
+                    'route' => 'backend.notifications.index',
+                    'shortTitle' => 'Li',
+                    'active' => 'app/notifications',
+                    'permission' => ['view_notification'],
+                    'order' => 0,
+                ]);
+            }
+            if(auth()->user()->can('view_notification') && auth()->user()->can('view_notification_template')){
+                $this->childMain($notification, [
+                    'icon' => 'ph ph-layout',
+                    'title' => __('notification.template'),
+                    'route' => 'backend.notification-templates.index',
+                    'shortTitle' => 'TE',
+                    'active' => 'app/notification-templates*',
+                    'permission' => ['view_notification_template'],
                     'order' => 0,
                 ]);
             }
 
-            $this->mainRoute($menu, [
-                'icon' => 'ph ph-list-bullets',
-                'title' => __('sidebar.categories'),
-                'route' => 'backend.category.index',
-                'permission' => ['view_clinics_category'],
-                'active' => ['app/category'],
-                'order' => 0,
-            ]);
-
-            $this->mainRoute($menu, [
-                'icon' => 'ph ph-first-aid-kit',
-                'title' => __('sidebar.services'),
-                'route' => 'backend.services.index',
-                'active' => ['app/services'],
-                'permission' => ['view_clinics_service'],
-                'order' => 0,
-            ]);
-
-            $this->mainRoute($menu, [
-                'icon' => ' ph ph-star',
-                'title' => __('sidebar.reviews'),
-                'route' => ['backend.doctors.review'],
-                'active' => ['app/doctors-review'],
-                'permission' => ['view_reviews'],
-                'order' => 0,
-            ]);
-
-            $this->mainRoute($menu, [
-                'icon' => 'ph ph-users',
-                'title' =>  __('sidebar.patient'),
-                'route' => 'backend.customers.index',
-                'active' => ['app/customers'],
-                'permission' => 'view_customer',
-                'order' => 0,
-            ]);
-
-            $this->mainRoute($menu, [
-                'icon' => 'ph ph-user-circle-gear',
-                'title' => __('sidebar.receptionist'),
-                'route' => 'backend.receptionist.index',
-                'active' => ['app/receptionist'],
-                'permission' => ['view_clinic_receptionist_list'],
-                'order' => 0,
-            ]);
-
-            $this->mainRoute($menu, [
-                'icon' => 'ph ph-percent',
-                'title' => __('sidebar.tax'),
-                'route' => 'backend.tax.index',
-                'active' => ['app/tax'],
-                'permission' => 'view_tax',
-                'order' => 0,
-            ]);
-            $this->mainRoute($menu, [
-                'icon' => 'ph ph-invoice',
-                'title' => __('sidebar.billing_record'),
-                'route' => 'backend.billing-record.index',
-                'active' => ['app/billing-record'],
-                'permission' => 'view_billing_record',
-                'order' => 0,
-            ]);
-            $this->mainRoute($menu, [
-                'icon' => 'ph ph-currency-dollar',
-                'title' => __('sidebar.doctor_earning'),
-                'route' => 'backend.earnings.index',
-                'active' => ['app/earnings'],
-                'permission' => ['view_doctor_earning'],
-                'order' => 0,
-            ]);
-
-            $this->mainRoute($menu, [
-                'icon' => 'ph ph-currency-dollar',
-                'title' => __('sidebar.doctor_payout'),
-                'route' => 'backend.reports.doctor-payout-report',
-                'active' => ['app/doctor-payout-report'],
-                'permission' => ['view_doctor_payouts'],
-                'order' => 0,
-            ]);
-
-            $this->mainRoute($menu, [
-                'icon' => 'ph ph-gear-six',
-                'title' => __('menu.settings'),
-                'route' => 'backend.settings',
-                'active' => 'app/settings',
-                'permission' => ['view_setting'],
-                'order' => 0,
-            ]);
-            $location = $this->parentMenu($menu, [
-                'icon' => 'ph ph-map-pin-line',
-                'title' => __('sidebar.location'),
-                'nickname' => 'location',
-                'permission' => ['view_location'],
-                'order' => 0,
-            ]);
-
-            $this->childMain($location, [
-                'title' => __('sidebar.city'),
-                'route' => 'backend.city.index',
-                'active' => 'app/city',
-                'shortTitle' => 'CT',
-                'permission' => ['view_city'],
-                'order' => 0,
-                'icon' => 'ph ph-city',
-            ]);
-            $this->childMain($location, [
-                'title' => __('sidebar.state'),
-                'route' => 'backend.state.index',
-                'shortTitle' => 'CT',
-                'permission' => ['view_state'],
-                'active' => ['app/state'],
-                'order' => 0,
-                'icon' => 'ph ph-map-trifold',
-            ]);
-            $this->childMain($location, [
-                'title' => __('sidebar.country'),
-                'route' => 'backend.country.index',
-                'shortTitle' => 'CT',
-                'active' => ['app/country'],
-                'permission' => ['view_country'],
-                'order' => 0,
-                'icon' => 'ph ph-globe-hemisphere-east',
-            ]);
-
-            $this->mainRoute($menu, [
-                'icon' => ' ph ph-note',
-                'title' => __('page.title'),
-                'route' => ['backend.pages.index'],
-                'active' => ['app/pages'],
-                'permission' => ['view_pages'],
-                'order' => 0,
-            ]);
-
             
+            if(auth()->user()->can('view_notification')){
+                $custom_form = $this->parentMenu($menu, [
+                    'icon' => 'ph ph-table',
+                    'title' => __('messages.customforms'),
+                    'nickname' => 'custom_form',
+                    'permission' => ['view_notification'],
+                    'order' => 0,
+                ]);
 
-            $custom_form = $this->parentMenu($menu, [
-                'icon' => 'ph ph-table',
-                'title' => __('messages.customforms'),
-                'nickname' => 'custom_form',
-                'permission' => ['view_notification'],
-                'order' => 0,
-            ]);
-
-            $this->childMain($custom_form, [
-                'icon' => 'ph ph-list-bullets',
-                'title' => __('messages.customforms_list'),
-                'route' => 'backend.custom-form.index',
-                'shortTitle' => 'Li',
-                'active' => 'app/settings#/customform',
-                'permission' => ['view_notification'],
-                'order' => 0,
-            ]);
-
-            $this->mainRoute($menu, [
-                'icon' => 'ph ph-exam',
-                'title' => __('sidebar.app_banner'),
-                'route' => 'backend.app-banners.index',
-                'active' => 'app/app-banners',
-                'permission' => ['view_app_banner'],
-                'order' => 0,
-            ]);
+                $this->childMain($custom_form, [
+                    'icon' => 'ph ph-list-bullets',
+                    'title' => __('messages.customforms_list'),
+                    'route' => 'backend.custom-form.index',
+                    'shortTitle' => 'Li',
+                    'active' => 'app/settings#/customform',
+                    'permission' => ['view_notification'],
+                    'order' => 0,
+                ]);
+            }
+            if(auth()->user()->can('view_app_banner')){
+                $this->mainRoute($menu, [
+                    'icon' => 'ph ph-exam',
+                    'title' => __('sidebar.app_banner'),
+                    'route' => 'backend.app-banners.index',
+                    'active' => 'app/app-banners',
+                    'permission' => ['view_app_banner'],
+                    'order' => 0,
+                ]);
+            }
+            
 
 
             // $permissionsToCheck = ['view_clinics_center', 'view_clinics_category', 'view_clinics_service', 'view_doctors', 'view_doctors_session', 'view_clinic_patient_list', 'view_patient_soap', 'view_clinic_appointment_list', 'view_encounter_template', 'view_encounter'];
