@@ -1,6 +1,6 @@
 <template>
   <form @submit="formSubmit">
-    <div class="offcanvas offcanvas-end offcanvas-w-40" tabindex="-1" id="form-offcanvas" aria-labelledby="form-offcanvasLabel">
+    <div class="offcanvas offcanvas-end offcanvas-w-40 customercanvas" tabindex="-1" id="form-offcanvas" aria-labelledby="form-offcanvasLabel">
       <FormHeader :currentId="currentId" :editTitle="editTitle" :createTitle="createTitle"></FormHeader>
       <div class="offcanvas-body">
         <div class="row">
