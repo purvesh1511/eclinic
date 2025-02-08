@@ -145,6 +145,20 @@ class VendorEarningsController extends Controller
                 return Currency::format($totalAdminEarning);
             })
 
+            ->editColumn('total_earning_client_admin', function ($data) {
+                 
+                $totalAdminEarning = 0;
+                
+                foreach($data['commission'] as $commission){ 
+
+                    $commission_data = CommissionEarning::where('commissionable_id', $commission->commissionable_id)->where('user_type', 'admin')->where('commission_status', 'unpaid')->first();
+                    $totalAdminEarning += $commission_data->commission_amount ?? 0;
+
+                }
+                $total = $data->total_pay + $totalAdminEarning; 
+                return Currency::format($total);
+            })
+
             ->editColumn('total_pay', function ($data) {
                 return Currency::format($data->total_pay);
             })
