@@ -441,6 +441,9 @@ class DoctorController extends Controller
                 $query->where('status', $filter['column_status']);
             }
         }
+        $query->whereHas('doctor', function ($query) use ($filter) {
+            $query->where('is_pathology', 0);
+        });
         $query->orderBy('created_at', 'desc');
 
         $datatable = $datatable->eloquent($query)

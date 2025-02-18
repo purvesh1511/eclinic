@@ -1,5 +1,5 @@
 
-<div class="sidebar-base pr-hide
+<div class="sidebar-base 
             {{ getCustomizationSetting('sidebar_show') == 'sidebar-none' ? 'sidebar-none' : 'sidebar' }}
             {{ !empty(getCustomizationSetting('sidebar_menu_style')) ? getCustomizationSetting('sidebar_menu_style') : 'sidebar-default navs-rounded' }}
             {{ getCustomizationSetting('sidebar_color') }}
@@ -30,6 +30,7 @@
               @php
                   $menu = new \App\Http\Middleware\GenerateMenus();
                   $menu = $menu->handle('menu', 'vertical', 'ARRAY_MENU');
+                  
               @endphp
                 @include(config('laravel-menu.views.bootstrap-items'), ['items' => $menu->roots()])
             </ul>

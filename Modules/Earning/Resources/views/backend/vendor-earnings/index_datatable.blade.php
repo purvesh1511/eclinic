@@ -77,7 +77,13 @@
                 orderable: false,
                 searchable: false
             },
-            
+            { 
+                data: 'total_earning_client_admin', 
+                name: 'total_earning_client_admin', 
+                title: "{{ __('earning.lbl_client_admin_earnings') }}", 
+                orderable: false, 
+                searchable: false 
+            },
             {
                 data: 'updated_at',
                 name: 'updated_at',

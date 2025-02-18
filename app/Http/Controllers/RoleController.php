@@ -16,6 +16,7 @@ class RoleController extends Controller
      */
     public function index()
     {
+        // dd("ASDasd");
         $data = Role::all();
         if (request()->wantsJson()) {
             return response()->json(['data' => $data, 'status' => true]);
@@ -88,6 +89,7 @@ class RoleController extends Controller
     public function edit($id)
     {
         $data = Role::find($id);
+        // dd($data);
         $view = view('permission-role.form-role', ['data' => $data])->render();
 
         return response()->json(['data' => $view, 'status' => true]);

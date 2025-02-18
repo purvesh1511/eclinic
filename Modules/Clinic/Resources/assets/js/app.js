@@ -6,6 +6,7 @@ import ClinicServiceOffcanvas from './component/ClinicServiceOffcanvas.vue'
 import ClinicCategoryOffcanvas from './component/ClinicCategoryOffcanvas.vue'
 import ClinicAppointmentOffcanvas from './component/ClinicAppointmentOffcanvas.vue'
 import DoctorOffcanvas from './component/DoctorOffcanvas.vue'
+import PathologyOffcanvas from './component/PathologyOffcanvas.vue'
 import doctordetail from './component/doctordetail.vue'
 import AssignDoctorFormOffCanvas from './component/assign/AssignDoctorFormOffcanvas.vue'
 import DoctorSessionOffcanvas from './component/DoctorSessionOffcanvas.vue'
@@ -34,6 +35,7 @@ app.component('clinic-service-offcanvas', ClinicServiceOffcanvas)
 app.component('clinic-category-offcanvas',ClinicCategoryOffcanvas)
 app.component('clinic-appointment-offcanvas',ClinicAppointmentOffcanvas)
 app.component('doctor-offcanvas',DoctorOffcanvas)
+app.component('pathology-offcanvas',PathologyOffcanvas)
 app.component('doctor-details-offcanvas',doctordetail)
 app.component('assign-doctor-form-offcanvas', AssignDoctorFormOffCanvas)
 app.component('doctor-session-offcanvas', DoctorSessionOffcanvas)

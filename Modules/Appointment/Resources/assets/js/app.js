@@ -1,3 +1,4 @@
+console.log("ASDasd")
 import { InitApp } from '@/helpers/main'
 
 import ClinicAppointmentOffcanvas from './components/ClinicAppointmentOffcanvas.vue'
@@ -49,3 +50,4 @@ if (mountPoint && !mountPoint.__vue_app__) {
   }
   app.mount(mountPoint)
 }
+

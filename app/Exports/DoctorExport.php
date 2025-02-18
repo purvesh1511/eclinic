@@ -45,7 +45,9 @@ class DoctorExport implements FromCollection, WithHeadings, WithEvents, WithCust
         $query->whereDate('users.created_at', '<=', $this->dateRange[1]);
 
         $query->orderBy('users.updated_at', 'desc');
-
+        $query->whereHas('doctor', function ($query) {
+            $query->where('is_pathology', 0);
+        });
         $query = $query->get();
 
         $newQuery = $query->map(function ($row) {

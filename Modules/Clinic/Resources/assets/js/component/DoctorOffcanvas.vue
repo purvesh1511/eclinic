@@ -1,6 +1,6 @@
 <template>
   <form @submit="formSubmit">
-    <div class="offcanvas offcanvas-end offcanvas-w-40 offcanvas-booking" tabindex="-1" id="form-offcanvas" aria-labelledby="form-offcanvasLabel">
+    <div class="offcanvas offcanvas-end offcanvas-w-40 offcanvas-booking doctoroffcanvas" tabindex="-1" id="form-offcanvas" aria-labelledby="form-offcanvasLabel">
       <FormHeader :currentId="currentId" :editTitle="editTitle" :createTitle="createTitle"></FormHeader>
       <div class="offcanvas-body">
         <div class="row">
@@ -245,16 +245,6 @@
                 <label class="form-label mb-0" for="category-status">{{ $t('clinic.lbl_status') }}</label>
                 <div class="form-check form-switch">
                   <input class="form-check-input" :value="1" name="status" id="category-status" type="checkbox" v-model="status" />
-                </div>
-              </div>
-            </div>
-          </div>
-          <div class="col-md-12">
-            <div class="form-group">
-              <div class="d-flex justify-content-between align-items-center form-control">
-                <label class="form-label mb-0" for="category-status">Is Pathology</label>
-                <div class="form-check form-switch">
-                  <input class="form-check-input" :value="1" name="is_pathology" id="category-status" type="checkbox" v-model="is_pathology" />
                 </div>
               </div>
             </div>

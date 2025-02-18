@@ -10,6 +10,7 @@
       <div class="offcanvas-body">
         <div class="row">
           <div class="col-12">
+            <button type="button" class="btn-add-offcanvas" id="patience-button"><i class="ph ph-x-circle"></i></button>
             <div class="form-group" v-if="!selectedPatient">
               <label class="form-label">{{ $t('clinic.lbl_select_patient') }} <span class="text-danger">*</span></label>
               <Multiselect id="patient_id" v-model="patient_id" :value="patient_id" :placeholder="$t('clinic.lbl_select_patient')" v-bind="singleSelectOption" :options="patientlist.options" class="form-group"></Multiselect>
@@ -180,6 +181,7 @@
       </div>
     </div>
   </form>
+  
   <div class="modal fade" id="exampleModalCenter1" tabindex="-1" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
     <div class="modal-dialog modal-sm modal-dialog-centered">
       <div class="modal-content">
